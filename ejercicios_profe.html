@@ -68,39 +68,33 @@
         </section>
         <hr>
         <section>
-            <h2>Ejercicio 5 Agregar flor</h2>
-            <form id="form-agregar">
-                <fieldset>
-                    <label for="agregar-flor-nombre">Nombre:</label>
-                    <input type="text" name="agregar" id="agregar-flor-nombre">
+            <h2>Ejercicio 5 Agregar nueva flor</h2>
 
-                    <label for="agregar-flor-color">Color:</label>
-                    <input type="text" name="agregar" id="agregar-flor-color">
-
-                    <!-- <label for="agregar-flor-floracion">Floracion:</label> -->
-                    <!-- <input type="text" name="agregar" id="agregar-flor-floracion"> -->
-
-                    <label for="agregar-flor-floracion">Floracion:</label>
-                    <select name="floracion" id="agregar-flor-floracion">
+            <form id="form-add-flower">
+                <div>
+                    <label for="nombre">Nombre de la flor</label>
+                    <input type="text" name="nombre" id="nombre">
+                </div>
+                <div>
+                    <label for="color">Color de la flor</label>
+                    <input type="text" name="color" id="color">
+                </div>
+                <div>
+                    <select name="floracion" id="floracion">
+                        <option value="primavera" selected>Primavera</option>
                         <option value="verano">Verano</option>
-                        <option value="invierno">Invierno</option>
                         <option value="otoño">Otoño</option>
-                        <option value="primavera">Primavera</option>
+                        <option value="invierno">Invierno</option>
 
                     </select>
+                </div>
+                <div>
+                    <input type="radio" name="stock" id="stockTrue" checked><label for="stockTrue">Con stock</label>
+                    <input type="radio" name="stock" id="stockFalse" checked><label for="stockFalse">Sin stock</label>
+                </div>
 
-                    <div>
-                        <label><input type="radio" name="agregar" value="true" id="agregar-flor-stock">Con stock</label>
-                        <label><input type="radio" name="agregar" value="false" id="agregar-flor-nostock">Sin
-                            stock</label>
-                    </div>
-                    <br><br>
-                    <input type="submit" value="Agregar flor">
-
-                </fieldset>
+                <input type="submit" value="Añadir flor">
             </form>
-
-            <div id="ejercicio5"></div>
         </section>
         <hr>
         <section>
@@ -121,7 +115,7 @@
 
     </main>
     <br><br><br><br><br>
-    <script src="js/app.js"></script>
+    <script src="js/app2.js"></script>
 </body>
 
 </html>

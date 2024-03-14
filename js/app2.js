@@ -1,6 +1,11 @@
 // Datos de trabajo
 
-const flores = [
+// Esta instruccion sirve para borrar este elemento del local storage
+localStorage.removeItem("flores")
+
+// De esta manera al abrir la pagina busca en el localstorage y si no existe utiliza el array dado
+const flores = JSON.parse(localStorage.getItem("flores")) || [
+
     { nombre: "Rosa", color: "rojo", floracion: "primavera", stock: true },
     { nombre: "Rosa", color: "blanco", floracion: "verano", stock: true },
     { nombre: "Jazmín", color: "blanco", floracion: "verano", stock: false },
@@ -9,6 +14,8 @@ const flores = [
     { nombre: "Clavel", color: "rojo", floracion: "verano", stock: true },
 
 ]
+
+
 
 /*  Funcion para ordenar listas, la utilizare dentro de la funcion para mostrar las flores en html
 flores.sort(function (a, b) {
@@ -235,42 +242,29 @@ formFlor.addEventListener("submit", (e) => {
 // flor: cyclamen, color:rosa, floracion: invierno, stock:true
 // Tiene que actualizarse automáticamente la lista del ejercicio 1
 
-const formAgregar = document.getElementById("form-agregar")
-const divEjercicio5 = document.getElementById("ejercicio5")
+const formAddFlower = document.getElementById("form-add-flower")
 
-// console.log(formAgregar) Console log para pruebas
-
-
-formAgregar.addEventListener("submit", (e) => {
-    let nuevaFLor = {}
+formAddFlower.addEventListener("submit", (e) => {
     e.preventDefault()
 
+    let nombre = formAddFlower[0].value
+    let color = formAddFlower[1].value
+    let floracion = formAddFlower[2].value
+    let stock = formAddFlower[3].checked
 
-    nuevaFLor.nombre = formAgregar[1].value
-    nuevaFLor.color = formAgregar[2].value
-    nuevaFLor.floracion = formAgregar[3].value
+    let miFLor = { nombre: nombre, color: color, floracion: floracion, stock: stock }
 
-    if (formAgregar[4].checked) {
-        nuevaFLor.stock = true
-    } else if (formAgregar[5].checked) {
-        nuevaFLor.stock = false
-    }
-    flores.push(nuevaFLor)
-    // console.log(flores)  Console log para pruebas
+    flores.push(miFLor)
+
+    // Agregar al local storage el array, debe ser pasado como un formato JSON
+    localStorage.setItem("flores", JSON.stringify(flores))
 
     armarLista2(flores)
-
-    // De aqui recupero los nombres de las flores para crear el mensaje para insertarlas en el HTML
-    let listadoSelect = ""
-    for (let i = 0; i < flores.length; i++) {
-        listadoSelect += `<option>${flores[i].nombre}</option>`
-    }
-    // Insertarlo el listado en el select y se muestra en el HTML
-    formPrecio[0].innerHTML = listadoSelect
-
-    // console.log(listadoSelect)
-
 })
+
+
+
+
 
 // ==============================================================================
 // EJERCICIO 6
@@ -284,44 +278,6 @@ formAgregar.addEventListener("submit", (e) => {
 // cyclamen: 4.50€
 // Tiene que actualizarse automáticamente la lista del ejercicio 1
 
-const formPrecio = document.getElementById("form-precio")
-const divEjercicio6 = document.getElementById("ejercicio6")
-
-let listadoSelect = ""
-for (let i = 0; i < flores.length; i++) {
-    listadoSelect += `<option>${flores[i].nombre}</option>`
-}
-
-formPrecio[0].innerHTML = listadoSelect
-// console.log(listadoSelect)
-
-formPrecio.addEventListener("submit", (e) => {
-    e.preventDefault()
-    
-    let nombre = formPrecio[0].value
-    let precio = formPrecio[1].value
-
-    if (isNaN(precio.trim()) || precio == "") {
-        alert("no es un numero")
-    }
-  
-    for (let i = 0; i < flores.length; i++) {
-        if (flores[i].nombre == nombre) {
-            flores[i].precio = Number(precio)
-        }
-    }
-    // console.log(flores)  probando los resultados
-    armarLista2(flores)
-    formPrecio.reset()
-    formPrecio[1].focus()
-
-})
-
-
-
-
-
-
 // ==============================================================================
 // EJERCICIO 7
 
@@ -331,22 +287,6 @@ formPrecio.addEventListener("submit", (e) => {
 
 // Previamente le he agregado el icono de borrar y un onclick
 // en los elementos de la lista generados por la funcion armarLista2()
-
-function borrarItem() {
-    let lista = document.querySelector("#ejercicio1 ul")
-    console.log(lista)
-}
-
-
-
-
-
-
-
-
-
-
-
 
 
 // ==============================================================================
